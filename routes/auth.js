@@ -2,15 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 
-const { body, validationResult } = require('express-validator');
+const { login } = require('../controllers/auth');
 
-const createError = require('http-errors');
-const User = require('../models/user');
-
-router.post('/login', (req, res, next) => {
-  res.json({
-    message: 'Login route',
-  });
-});
+router.post('/login', login);
 
 module.exports = router;
