@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+# private key for JWT
+id_rsa_priv.pem
