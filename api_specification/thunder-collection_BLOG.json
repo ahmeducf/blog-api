@@ -1,0 +1,600 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "BLOG_DEV",
+    "dateExported": "2023-09-22T19:28:41.076Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "26b6527b-1f1e-41fe-a51f-ac5470dccdc7",
+            "name": "audiance",
+            "containerId": "",
+            "created": "2023-09-22T16:11:52.865Z",
+            "sortNum": 20000,
+            "settings": {
+                "tests": [
+                    {
+                        "type": "res-code",
+                        "custom": "",
+                        "action": "equal",
+                        "value": "200"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "e12addd2-27a2-471f-bdb3-8e42ab09aebb",
+            "name": "admin",
+            "containerId": "",
+            "created": "2023-09-22T16:12:11.190Z",
+            "sortNum": 30000,
+            "settings": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": "<token>"
+                }
+            }
+        },
+        {
+            "_id": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "GET all posts",
+            "containerId": "26b6527b-1f1e-41fe-a51f-ac5470dccdc7",
+            "created": "2023-09-22T16:49:24.216Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "POST new post",
+            "containerId": "e12addd2-27a2-471f-bdb3-8e42ab09aebb",
+            "created": "2023-09-22T18:23:21.164Z",
+            "sortNum": 50000,
+            "settings": {
+                "tests": [
+                    {
+                        "type": "res-code",
+                        "custom": "",
+                        "action": "equal",
+                        "value": "201"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "a40db3d6-4786-433f-a6e7-70a12eaeacca",
+            "name": "GET post by id",
+            "containerId": "26b6527b-1f1e-41fe-a51f-ac5470dccdc7",
+            "created": "2023-09-22T18:30:03.444Z",
+            "sortNum": 70000
+        },
+        {
+            "_id": "91a597fb-c286-4bf1-a263-8e2fade19d86",
+            "name": "PUT post by id",
+            "containerId": "e12addd2-27a2-471f-bdb3-8e42ab09aebb",
+            "created": "2023-09-22T18:40:50.798Z",
+            "sortNum": 80000,
+            "settings": {
+                "tests": [
+                    {
+                        "type": "res-code",
+                        "custom": "",
+                        "action": "equal",
+                        "value": "200"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "9c3b6d02-f71e-4e6c-9104-199f46247504",
+            "name": "DELETE post by id",
+            "containerId": "e12addd2-27a2-471f-bdb3-8e42ab09aebb",
+            "created": "2023-09-22T18:48:44.233Z",
+            "sortNum": 90000,
+            "settings": {
+                "tests": [
+                    {
+                        "type": "res-code",
+                        "custom": "",
+                        "action": "equal",
+                        "value": "204"
+                    }
+                ]
+            }
+        },
+        {
+            "_id": "fc9dde9c-b672-4268-bc90-1714878bac0b",
+            "name": "login",
+            "containerId": "e12addd2-27a2-471f-bdb3-8e42ab09aebb",
+            "created": "2023-09-22T19:07:06.057Z",
+            "sortNum": 100000,
+            "settings": {
+                "tests": [
+                    {
+                        "type": "res-code",
+                        "custom": "",
+                        "action": "equal",
+                        "value": "201"
+                    }
+                ]
+            }
+        }
+    ],
+    "requests": [
+        {
+            "_id": "6f1e73a3-65d0-4ad6-88ad-4dc3248cc9ab",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "fc9dde9c-b672-4268-bc90-1714878bac0b",
+            "name": "login successfuly",
+            "url": "http://localhost:3000/api/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-09-22T16:12:35.057Z",
+            "modified": "2023-09-22T16:48:19.239Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}\n",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "62c3d39f-96da-4d2e-94b3-0840af11cc2a",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "new post with default isPublished",
+            "url": "http://localhost:3000/api/posts",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-09-22T18:15:37.281Z",
+            "modified": "2023-09-22T18:21:07.952Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"testing title 1\",\n  \"content\": \"testing content 1\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8278bc17-22fb-4528-b530-a11f103b294a",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "new published post",
+            "url": "http://localhost:3000/api/posts",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-09-22T18:18:38.571Z",
+            "modified": "2023-09-22T18:22:07.720Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"testing published post title\",\n  \"content\": \"testing published post content\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ffda1840-324c-42c5-9964-d827d8e65386",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "new unpublished post",
+            "url": "http://localhost:3000/api/posts",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-09-22T18:19:51.196Z",
+            "modified": "2023-09-22T18:23:02.984Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"testing unpublished post title\",\n  \"content\": \"testing unpublished post content\",\n  \"isPublished\": false\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "e9991d20-44af-4541-a4e7-8e60385428cc",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all posts",
+            "url": "http://localhost:3000/api/posts",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-09-22T16:50:05.756Z",
+            "modified": "2023-09-22T16:50:46.842Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "fbbd45a2-8403-478c-907e-bcff0d5ed2a1",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "bad request: missing fields",
+            "url": "http://localhost:3000/api/posts",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-09-22T18:25:37.641Z",
+            "modified": "2023-09-22T18:27:03.916Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"sending new post with no content\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f9bc63b6-b02d-458a-9494-45f0df207032",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all published posts",
+            "url": "http://localhost:3000/api/posts?published=true",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-09-22T16:51:51.785Z",
+            "modified": "2023-09-22T16:57:59.446Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "published",
+                    "value": "true",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "115be4bd-57ee-4446-ac51-e92cb7b19294",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "bad request: invalid data",
+            "url": "http://localhost:3000/api/posts",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-09-22T18:46:27.504Z",
+            "modified": "2023-09-22T18:47:53.482Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": 1,\n  \"content\": 2\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "01ca911c-f152-4334-bd56-b34c19a2a81d",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all unpublished posts",
+            "url": "http://localhost:3000/api/posts?published=false",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-09-22T16:58:47.569Z",
+            "modified": "2023-09-22T16:58:59.005Z",
+            "headers": [],
+            "params": [
+                {
+                    "name": "published",
+                    "value": "false",
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "363710d6-9077-43fb-898e-3cad4e49d9c4",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "f009cf61-d434-4a2c-b8ee-8bfddf151ea9",
+            "name": "unauthorized request",
+            "url": "http://localhost:3000/api/posts",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-09-22T19:01:54.035Z",
+            "modified": "2023-09-22T19:05:24.075Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"post\",\n  \"content\": \"post content\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "none"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a95e8ad7-24c4-4614-9b82-2d30310b3b04",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all posts sorted by created date",
+            "url": "",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-09-22T16:59:59.986Z",
+            "modified": "2023-09-22T16:59:59.986Z",
+            "headers": []
+        },
+        {
+            "_id": "f0f392cb-7412-4050-9aaf-61c90c4016e5",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all posts sorted by updated date Copy",
+            "url": "",
+            "method": "GET",
+            "sortNum": 75000,
+            "created": "2023-09-22T18:07:41.491Z",
+            "modified": "2023-09-22T18:07:41.491Z",
+            "headers": []
+        },
+        {
+            "_id": "dc473903-3e37-4b07-872a-32125534dac0",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all posts created from date to date",
+            "url": "",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-09-22T17:03:04.725Z",
+            "modified": "2023-09-22T17:03:04.725Z",
+            "headers": []
+        },
+        {
+            "_id": "ee7dd2ee-008c-4180-b626-7993e04cf599",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "all posts updated from date to date",
+            "url": "",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-09-22T18:10:13.923Z",
+            "modified": "2023-09-22T18:10:13.923Z",
+            "headers": []
+        },
+        {
+            "_id": "ef857997-73dc-4a76-9cdd-7800f0037616",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "combo request",
+            "url": "",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2023-09-22T18:11:07.458Z",
+            "modified": "2023-09-22T18:11:07.458Z",
+            "headers": []
+        },
+        {
+            "_id": "572f3ebb-c5e0-4bc4-944d-e5f6264566a0",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "cadbee11-cc87-45f0-b9a2-5a4ab29fd99f",
+            "name": "missing to_date",
+            "url": "",
+            "method": "GET",
+            "sortNum": 120000,
+            "created": "2023-09-22T18:13:46.258Z",
+            "modified": "2023-09-22T18:13:46.258Z",
+            "headers": []
+        },
+        {
+            "_id": "d898f52a-6de1-4d83-bb47-2ceee3562b58",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "a40db3d6-4786-433f-a6e7-70a12eaeacca",
+            "name": "post by id",
+            "url": "http://localhost:3000/api/posts/1",
+            "method": "GET",
+            "sortNum": 170000,
+            "created": "2023-09-22T18:30:44.414Z",
+            "modified": "2023-09-22T18:31:03.116Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3be5f92d-4077-4f01-88e4-9c79cffbcaa5",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "a40db3d6-4786-433f-a6e7-70a12eaeacca",
+            "name": "bad request: invalid id",
+            "url": "http://localhost:3000/api/posts/bad_id",
+            "method": "GET",
+            "sortNum": 180000,
+            "created": "2023-09-22T18:32:07.294Z",
+            "modified": "2023-09-22T18:32:26.036Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "06117777-bc57-4579-8732-dee5d497429b",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "91a597fb-c286-4bf1-a263-8e2fade19d86",
+            "name": "update post by id",
+            "url": "http://localhost:3000/api/posts/1",
+            "method": "PUT",
+            "sortNum": 200000,
+            "created": "2023-09-22T18:41:44.483Z",
+            "modified": "2023-09-22T18:43:42.511Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"update title only\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "bbc056fa-1236-4e33-935c-625d03f0fea2",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "91a597fb-c286-4bf1-a263-8e2fade19d86",
+            "name": "bad request: invalid id",
+            "url": "http://localhost:3000/api/posts/bad_id",
+            "method": "PUT",
+            "sortNum": 220000,
+            "created": "2023-09-22T18:43:33.999Z",
+            "modified": "2023-09-22T18:44:51.085Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"testing title\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "29aaef68-6397-467a-ad9f-cb4dab09ae5a",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "91a597fb-c286-4bf1-a263-8e2fade19d86",
+            "name": "bad request: invalid data",
+            "url": "http://localhost:3000/api/posts/1",
+            "method": "PUT",
+            "sortNum": 230000,
+            "created": "2023-09-22T18:45:46.667Z",
+            "modified": "2023-09-22T19:18:50.098Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": 1\n}",
+                "form": []
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                }
+            ]
+        },
+        {
+            "_id": "193c0ed7-7964-4e00-adfb-f31300db8a99",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "9c3b6d02-f71e-4e6c-9104-199f46247504",
+            "name": "post by id",
+            "url": "http://localhost:3000/api/posts/1",
+            "method": "DELETE",
+            "sortNum": 250000,
+            "created": "2023-09-22T18:48:56.942Z",
+            "modified": "2023-09-22T18:49:27.417Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "9d67d085-0443-4d5a-9897-6b8bb10b362d",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "9c3b6d02-f71e-4e6c-9104-199f46247504",
+            "name": "bad request: invalid id",
+            "url": "http://localhost:3000/api/posts/bad_id",
+            "method": "DELETE",
+            "sortNum": 260000,
+            "created": "2023-09-22T18:49:43.042Z",
+            "modified": "2023-09-22T19:19:06.598Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "400"
+                }
+            ]
+        },
+        {
+            "_id": "b1153c34-7dfb-4b29-959d-d6f60272f345",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "91a597fb-c286-4bf1-a263-8e2fade19d86",
+            "name": "unauthorized request",
+            "url": "http://localhost:3000/api/posts/1",
+            "method": "PUT",
+            "sortNum": 280000,
+            "created": "2023-09-22T19:04:19.963Z",
+            "modified": "2023-09-22T19:18:46.071Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\": \"new post\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "none"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                }
+            ]
+        },
+        {
+            "_id": "73a0a33e-1dd9-494f-b907-3760ce5e62ad",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "9c3b6d02-f71e-4e6c-9104-199f46247504",
+            "name": "unauthorized request",
+            "url": "http://localhost:3000/api/posts/1",
+            "method": "DELETE",
+            "sortNum": 290000,
+            "created": "2023-09-22T19:06:37.826Z",
+            "modified": "2023-09-22T19:19:20.507Z",
+            "headers": [],
+            "params": [],
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                }
+            ]
+        },
+        {
+            "_id": "2d32b4e9-8b4a-4c50-a85d-6ffd5f8d381a",
+            "colId": "6975c0b5-37d3-456b-bc42-4b5fc20d26bf",
+            "containerId": "fc9dde9c-b672-4268-bc90-1714878bac0b",
+            "name": "unauthorized request",
+            "url": "http://localhost:3000/api/auth/login",
+            "method": "POST",
+            "sortNum": 300000,
+            "created": "2023-09-22T19:08:02.900Z",
+            "modified": "2023-09-22T19:19:44.667Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"password\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "none"
+            },
+            "tests": [
+                {
+                    "type": "res-code",
+                    "custom": "",
+                    "action": "equal",
+                    "value": "401"
+                }
+            ]
+        }
+    ],
+    "settings": {
+        "tests": [
+            {
+                "type": "Content-Type",
+                "custom": "",
+                "action": "isjson",
+                "value": ""
+            }
+        ]
+    }
+}
