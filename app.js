@@ -2,8 +2,10 @@ const express = require('express');
 const path = require('path');
 
 const createError = require('http-errors');
+const passport = require('passport');
 
 const connectDatabase = require('./config/database');
+const { jwtStrategy } = require('./config/passport');
 const logger = require('./utils/logger');
 
 const authRouter = require('./routes/auth');
@@ -16,6 +18,9 @@ const app = express();
 connectDatabase();
 
 app.use(logger());
+
+passport.use(jwtStrategy);
+app.use(passport.initialize());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -35,8 +40,10 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
 
   res.json({
-    message,
-    error,
+    error: {
+      message,
+      ...error,
+    },
   });
 });
 
