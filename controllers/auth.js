@@ -7,6 +7,7 @@ const {
   createUsernameValidationChain,
   createPasswordValidationChain,
   validate,
+  validateAuthorization,
 } = require('../utils/validation');
 
 module.exports.login = [
@@ -55,17 +56,7 @@ module.exports.login = [
 
 module.exports.refreshToken = [
   authenticate,
-  (req, res, next) => {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-
-    return res.status(401).json({
-      error: {
-        message: 'Unauthorized: No or invalid token is provided',
-      },
-    });
-  },
+  validateAuthorization,
   asyncHandler(async (req, res) => {
     const { token, expires } = generateAccessToken(req.user);
 
