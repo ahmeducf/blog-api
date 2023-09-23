@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler');
+const { authenticate } = require('../utils/passport');
 
 const User = require('../models/user');
 const { generateAccessToken } = require('../utils/jwt');
@@ -48,6 +49,18 @@ module.exports.login = [
     return res.json({
       token: req.token,
       expires: req.expires,
+    });
+  }),
+];
+
+module.exports.refreshToken = [
+  authenticate,
+  asyncHandler(async (req, res) => {
+    const { token, expires } = generateAccessToken(req.user);
+
+    return res.json({
+      token,
+      expires,
     });
   }),
 ];
