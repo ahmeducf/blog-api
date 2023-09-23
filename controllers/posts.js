@@ -11,6 +11,7 @@ const {
   handleSortQuery,
   handlePagination,
 } = require('./helpers/posts_helpers');
+const { validate, createPostValidationChain } = require('../utils/validation');
 
 module.exports.getPosts = [
   authenticate,
@@ -59,7 +60,7 @@ module.exports.getPosts = [
       query.sort(sort);
     }
 
-    /* 
+    /*
      * Offset based pagination is not recommended for large datasets
      * but it is doing good for this use case.
      * */
@@ -72,6 +73,37 @@ module.exports.getPosts = [
     res.setHeader('Content-Type', 'application/json');
     return res.json({
       posts,
+    });
+  }),
+];
+
+module.exports.createPost = [
+  authenticate,
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+
+    return res.status(401).json({
+      message: 'Unauthorized: No or invalid authentication token provided',
+    });
+  },
+  createPostValidationChain(),
+  validate,
+  asyncHandler(async (req, res) => {
+    const { title, content, isPublished } = req.body;
+
+    const post = new Post({
+      title,
+      content,
+      isPublished,
+    });
+
+    await post.save();
+
+    return res.status(201).json({
+      message: 'Post created successfully',
+      post,
     });
   }),
 ];
