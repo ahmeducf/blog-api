@@ -4,6 +4,11 @@ const path = require('path');
 const createError = require('http-errors');
 const passport = require('passport');
 
+const compression = require('compression');
+const helmet = require('helmet');
+const limiter = require('./utils/rate_limit');
+
+const setSettings = require('./config/settings');
 const connectDatabase = require('./config/database');
 const { jwtStrategy } = require('./config/passport');
 const logger = require('./utils/logger');
@@ -13,9 +18,11 @@ const postsRouter = require('./routes/posts');
 
 require('dotenv').config();
 
+connectDatabase();
+
 const app = express();
 
-connectDatabase();
+setSettings(app);
 
 app.use(logger());
 
@@ -24,6 +31,10 @@ app.use(passport.initialize());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(compression());
+app.use(helmet());
+app.use(limiter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/auth', authRouter);
