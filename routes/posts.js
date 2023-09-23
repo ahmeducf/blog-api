@@ -7,6 +7,7 @@ const {
   createPost,
   getPostById,
   updatePostById,
+  deletePostById,
 } = require('../controllers/posts');
 
 router.get('/', getPosts);
@@ -17,10 +18,6 @@ router.get('/:postId', getPostById);
 
 router.put('/:postId', updatePostById);
 
-router.delete('/:postId', (req, res, next) => {
-  res.json({
-    message: `Posts route to delete a post with id ${req.params.postId}`,
-  });
-});
+router.delete('/:postId', deletePostById);
 
 module.exports = router;

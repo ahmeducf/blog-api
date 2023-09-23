@@ -153,3 +153,19 @@ module.exports.updatePostById = [
     });
   }),
 ];
+
+module.exports.deletePostById = [
+  authenticate,
+  validateAuthorization,
+  validateObjectId,
+  validatePostExists,
+  asyncHandler(async (req, res) => {
+    const { post } = req;
+
+    await post.deleteOne();
+
+    return res.status(204).json({
+      message: 'Post deleted successfully',
+    });
+  }),
+];
