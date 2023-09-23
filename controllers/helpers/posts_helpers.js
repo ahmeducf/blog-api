@@ -1,14 +1,12 @@
-const { query, validationResult } = require('express-validator');
-const { createDateValidationChain } = require('../../utils/validation');
-
 module.exports.handlePublishedQuery = (req, res, next) => {
   const { published } = req.query;
+  const isPublished = published ? published.toLowerCase() : undefined;
 
   if (!req.isAuthenticated()) {
     req.query.published = true;
-  } else if (published === 'true') {
+  } else if (isPublished === 'true') {
     req.query.published = true;
-  } else if (published === 'false') {
+  } else if (isPublished === 'false') {
     req.query.published = false;
   } else {
     req.query.published = undefined;

@@ -69,6 +69,7 @@ module.exports.getPosts = [
 
     const posts = await query.exec();
 
+    res.setHeader('Content-Type', 'application/json');
     return res.json({
       posts,
     });
