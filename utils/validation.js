@@ -21,6 +21,10 @@ const createPasswordValidationChain = () =>
     .withMessage('password must be a string')
     .escape();
 
+const createDateValidationChain = (check, date) =>
+  check(date)
+    .isISO8601()
+
 const validate = (req, res, next) => {
   const errors = validationResult(req);
 
@@ -41,5 +45,6 @@ const validate = (req, res, next) => {
 module.exports = {
   createUsernameValidationChain,
   createPasswordValidationChain,
+  createDateValidationChain,
   validate,
 };
