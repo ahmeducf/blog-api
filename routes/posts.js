@@ -2,17 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-const { getPosts, createPost } = require('../controllers/posts');
+const { getPosts, createPost, getPostById } = require('../controllers/posts');
 
 router.get('/', getPosts);
 
 router.post('/', createPost);
 
-router.get('/:postId', (req, res, next) => {
-  res.json({
-    message: `Posts route to get a post with id ${req.params.postId}`,
-  });
-});
+router.get('/:postId', getPostById);
 
 router.put('/:postId', (req, res, next) => {
   res.json({

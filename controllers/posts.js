@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const asyncHandler = require('express-async-handler');
 const Post = require('../models/post');
 
@@ -103,6 +104,43 @@ module.exports.createPost = [
 
     return res.status(201).json({
       message: 'Post created successfully',
+      post,
+    });
+  }),
+];
+
+module.exports.getPostById = [
+  authenticate,
+  asyncHandler(async (req, res) => {
+    const { postId } = req.params;
+
+    if (!mongoose.isValidObjectId(postId)) {
+      return res.status(422).json({
+        error: {
+          message: 'Invalid post id',
+        },
+      });
+    }
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        error: {
+          message: 'Post not found',
+        },
+      });
+    }
+
+    if (!post.isPublished && !req.isAuthenticated()) {
+      return res.status(401).json({
+        error: {
+          message: 'Unauthorized: No or invalid authentication token provided',
+        },
+      });
+    }
+
+    return res.json({
       post,
     });
   }),
