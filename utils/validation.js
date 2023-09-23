@@ -44,7 +44,7 @@ const validate = (req, res, next) => {
   }
 };
 
-const createPostValidationChain = () => [
+const createCreatingPostValidationChain = () => [
   body('title')
     .exists()
     .withMessage('Title is required')
@@ -81,10 +81,55 @@ const createPostValidationChain = () => [
     .withMessage('isPublished must be a boolean'),
 ];
 
+const createUpdatingPostValidationChain = () => [
+  body('title')
+    .optional()
+    .isString()
+    .withMessage('Title must be a string')
+    .bail()
+    .trim()
+    .notEmpty()
+    .withMessage('Title is required')
+    .bail()
+    .isLength({ min: 3, max: 100 })
+    .withMessage('Title must be between 3 and 100 characters')
+    .bail()
+    .escape(),
+  body('content')
+    .optional()
+    .isString()
+    .withMessage('Content must be a string')
+    .bail()
+    .trim()
+    .notEmpty()
+    .withMessage('Content is required')
+    .bail()
+    .isLength({ min: 3, max: 1000 })
+    .withMessage('Content must be between 3 and 1000 characters')
+    .bail()
+    .escape(),
+  body('isPublished')
+    .optional()
+    .isBoolean()
+    .withMessage('isPublished must be a boolean'),
+];
+
+const validateAuthorization = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  return res.status(401).json({
+    message: 'Unauthorized: No or invalid authentication token provided',
+  });
+};
+
 module.exports = {
   createUsernameValidationChain,
   createPasswordValidationChain,
   createDateValidationChain,
-  createPostValidationChain,
+  createCreatingPostValidationChain,
+  createUpdatingPostValidationChain,
   validate,
+  validateAuthorization,
 };

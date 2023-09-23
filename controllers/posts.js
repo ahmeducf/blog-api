@@ -12,7 +12,12 @@ const {
   handleSortQuery,
   handlePagination,
 } = require('./helpers/posts_helpers');
-const { validate, createPostValidationChain } = require('../utils/validation');
+const {
+  validate,
+  validateAuthorization,
+  createCreatingPostValidationChain,
+  createUpdatingPostValidationChain,
+} = require('../utils/validation');
 
 module.exports.getPosts = [
   authenticate,
@@ -80,16 +85,8 @@ module.exports.getPosts = [
 
 module.exports.createPost = [
   authenticate,
-  (req, res, next) => {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-
-    return res.status(401).json({
-      message: 'Unauthorized: No or invalid authentication token provided',
-    });
-  },
-  createPostValidationChain(),
+  validateAuthorization,
+  createCreatingPostValidationChain(),
   validate,
   asyncHandler(async (req, res) => {
     const { title, content, isPublished } = req.body;
@@ -141,6 +138,47 @@ module.exports.getPostById = [
     }
 
     return res.json({
+      post,
+    });
+  }),
+];
+
+module.exports.updatePostById = [
+  authenticate,
+  validateAuthorization,
+  createUpdatingPostValidationChain(),
+  validate,
+  asyncHandler(async (req, res) => {
+    const { postId } = req.params;
+
+    if (!mongoose.isValidObjectId(postId)) {
+      return res.status(422).json({
+        error: {
+          message: 'Invalid post id',
+        },
+      });
+    }
+
+    const post = await Post.findById(postId);
+
+    if (!post) {
+      return res.status(404).json({
+        error: {
+          message: 'Post not found',
+        },
+      });
+    }
+
+    const { title, content, isPublished } = req.body;
+
+    post.title = title || post.title;
+    post.content = content || post.content;
+    post.isPublished = isPublished || post.isPublished;
+
+    await post.save();
+
+    return res.json({
+      message: 'Post updated successfully',
       post,
     });
   }),
