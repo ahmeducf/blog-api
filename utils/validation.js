@@ -1,4 +1,7 @@
+const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
+const Post = require('../models/post');
 
 const createUsernameValidationChain = () =>
   body('username')
@@ -124,6 +127,37 @@ const validateAuthorization = (req, res, next) => {
   });
 };
 
+const validateObjectId = (req, res, next) => {
+  const { postId } = req.params;
+
+  if (!mongoose.isValidObjectId(postId)) {
+    res.status(422).json({
+      error: {
+        message: 'Invalid post id',
+      },
+    });
+  } else {
+    next();
+  }
+};
+
+const validatePostExists = asyncHandler(async (req, res, next) => {
+  const { postId } = req.params;
+
+  const post = await Post.findById(postId);
+
+  if (!post) {
+    res.status(404).json({
+      error: {
+        message: 'Post not found',
+      },
+    });
+  } else {
+    req.post = post;
+    next();
+  }
+});
+
 module.exports = {
   createUsernameValidationChain,
   createPasswordValidationChain,
@@ -132,4 +166,6 @@ module.exports = {
   createUpdatingPostValidationChain,
   validate,
   validateAuthorization,
+  validateObjectId,
+  validatePostExists,
 };

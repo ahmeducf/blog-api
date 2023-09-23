@@ -17,6 +17,8 @@ const {
   validateAuthorization,
   createCreatingPostValidationChain,
   createUpdatingPostValidationChain,
+  validateObjectId,
+  validatePostExists,
 } = require('../utils/validation');
 
 module.exports.getPosts = [
@@ -108,26 +110,10 @@ module.exports.createPost = [
 
 module.exports.getPostById = [
   authenticate,
+  validateObjectId,
+  validatePostExists,
   asyncHandler(async (req, res) => {
-    const { postId } = req.params;
-
-    if (!mongoose.isValidObjectId(postId)) {
-      return res.status(422).json({
-        error: {
-          message: 'Invalid post id',
-        },
-      });
-    }
-
-    const post = await Post.findById(postId);
-
-    if (!post) {
-      return res.status(404).json({
-        error: {
-          message: 'Post not found',
-        },
-      });
-    }
+    const { post } = req;
 
     if (!post.isPublished && !req.isAuthenticated()) {
       return res.status(401).json({
@@ -148,26 +134,10 @@ module.exports.updatePostById = [
   validateAuthorization,
   createUpdatingPostValidationChain(),
   validate,
+  validateObjectId,
+  validatePostExists,
   asyncHandler(async (req, res) => {
-    const { postId } = req.params;
-
-    if (!mongoose.isValidObjectId(postId)) {
-      return res.status(422).json({
-        error: {
-          message: 'Invalid post id',
-        },
-      });
-    }
-
-    const post = await Post.findById(postId);
-
-    if (!post) {
-      return res.status(404).json({
-        error: {
-          message: 'Post not found',
-        },
-      });
-    }
+    const { post } = req;
 
     const { title, content, isPublished } = req.body;
 
