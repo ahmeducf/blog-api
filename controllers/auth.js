@@ -55,6 +55,17 @@ module.exports.login = [
 
 module.exports.refreshToken = [
   authenticate,
+  (req, res, next) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+
+    return res.status(401).json({
+      error: {
+        message: 'Unauthorized: No or invalid token is provided',
+      },
+    });
+  },
   asyncHandler(async (req, res) => {
     const { token, expires } = generateAccessToken(req.user);
 

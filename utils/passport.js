@@ -7,14 +7,11 @@ module.exports.authenticate = (req, res, next) => {
     }
 
     if (!user) {
-      return res.status(401).json({
-        error: {
-          message: 'Unauthorized: No or invalid token is provided',
-        },
-      });
+      req.isAuthenticated = () => false;
+    } else {
+      req.isAuthenticated = () => true;
+      req.user = user;
     }
-
-    req.user = user;
 
     return next();
   })(req, res, next);
