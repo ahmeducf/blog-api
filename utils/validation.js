@@ -3,11 +3,14 @@ const { body, validationResult } = require('express-validator');
 const createUsernameValidationChain = () =>
   body('username')
     .exists()
+    .trim()
+    .notEmpty()
     .withMessage('username is required')
     .bail()
     .isString()
     .withMessage('username must be a string')
-    .escape();
+    .escape()
+    .toLowerCase();
 
 const createPasswordValidationChain = () =>
   body('password')
