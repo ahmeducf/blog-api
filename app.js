@@ -11,6 +11,7 @@ const limiter = require('./utils/rate_limit');
 const setSettings = require('./config/settings');
 const connectDatabase = require('./config/database');
 const { jwtStrategy } = require('./config/passport');
+const cors = require('./config/cors');
 const logger = require('./utils/logger');
 
 const authRouter = require('./routes/auth');
@@ -35,6 +36,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(compression());
 app.use(helmet());
 app.use(limiter);
+
+app.use(cors);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/auth', authRouter);
