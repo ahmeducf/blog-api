@@ -2,17 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const { body, validationResult } = require('express-validator');
+const { getPosts } = require('../controllers/posts');
 
-const createError = require('http-errors');
-
-const Post = require('../models/post');
-
-router.get('/', (req, res, next) => {
-  res.json({
-    message: 'Posts route to get all posts',
-  });
-});
+router.get('/', getPosts);
 
 router.post('/', (req, res, next) => {
   res.json({
