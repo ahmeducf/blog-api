@@ -1,8 +1,7 @@
 module.exports.handlePublishedQuery = (req, res, next) => {
   const { published } = req.query;
   const isPublished = published ? published.toLowerCase() : undefined;
-
-  if (!req.isAuthenticated()) {
+  if (req.isAuthenticated && !req.isAuthenticated()) {
     req.query.published = true;
   } else if (isPublished === 'true') {
     req.query.published = true;
