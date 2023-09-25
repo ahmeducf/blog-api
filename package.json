@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "debug": "DEBUG=blog-api:* npm run dev"
+    "debug": "DEBUG=blog-api:* npm run dev",
+    "test": "jest",
+    "test:watch": "jest --watchAll --detectOpenHandles"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -32,8 +34,11 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "^2.28.1",
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^8.15.1",
     "nodemon": "^3.0.1",
-    "prettier": "3.0.3"
+    "prettier": "3.0.3",
+    "supertest": "^6.3.3"
   },
   "engines": {
     "node": ">=18.16.0"
