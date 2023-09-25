@@ -19,6 +19,7 @@ const {
   createUpdatingPostValidationChain,
   validateObjectId,
   validatePostExists,
+  createPartialUpdatingPostValidationChain,
 } = require('../utils/validation');
 
 module.exports.getPosts = [
@@ -129,6 +130,31 @@ module.exports.getPostById = [
   }),
 ];
 
+module.exports.partiallyUpdatePostById = [
+  authenticate,
+  validateAuthorization,
+  createPartialUpdatingPostValidationChain(),
+  validate,
+  validateObjectId,
+  validatePostExists,
+  asyncHandler(async (req, res) => { 
+    const { post } = req;
+
+    const { title, content, isPublished } = req.body;
+
+    post.title = title ?? post.title;
+    post.content = content ?? post.content;
+    post.isPublished = isPublished ?? post.isPublished;
+
+    await post.save();
+
+    return res.json({
+      message: 'Post updated successfully',
+      post,
+    });
+  }),
+];
+
 module.exports.updatePostById = [
   authenticate,
   validateAuthorization,
@@ -141,9 +167,9 @@ module.exports.updatePostById = [
 
     const { title, content, isPublished } = req.body;
 
-    post.title = title || post.title;
-    post.content = content || post.content;
-    post.isPublished = isPublished || post.isPublished;
+    post.title = title;
+    post.content = content;
+    post.isPublished = isPublished ?? false;
 
     await post.save();
 

@@ -84,7 +84,9 @@ const createCreatingPostValidationChain = () => [
     .withMessage('isPublished must be a boolean'),
 ];
 
-const createUpdatingPostValidationChain = () => [
+const createUpdatingPostValidationChain = () => createCreatingPostValidationChain();
+
+const createPartialUpdatingPostValidationChain = () => [
   body('title')
     .optional()
     .isString()
@@ -164,6 +166,7 @@ module.exports = {
   createDateValidationChain,
   createCreatingPostValidationChain,
   createUpdatingPostValidationChain,
+  createPartialUpdatingPostValidationChain,
   validate,
   validateAuthorization,
   validateObjectId,
