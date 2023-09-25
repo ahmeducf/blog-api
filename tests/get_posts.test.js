@@ -1,8 +1,6 @@
 const request = require('supertest');
 
 const app = require('./config/setup');
-const postsRouter = require('../routes/posts');
-const authRouter = require('../routes/auth');
 
 const {
   initDatabase,
@@ -10,9 +8,6 @@ const {
 } = require('./config/database_config_testing');
 const { login } = require('./helpers/auth_helpers');
 const Post = require('../models/post');
-
-app.use('/api/posts', postsRouter);
-app.use('/api/auth', authRouter);
 
 let mongoServer;
 let accessToken;
