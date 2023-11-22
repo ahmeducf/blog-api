@@ -1,11 +1,16 @@
-const path = require('path');
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
-function generateAccessToken(user) {
-  const PRIVATE_KEY_PATH = path.join(process.cwd(), 'id_rsa_priv.pem');
-  const PRIVATE_KEY = fs.readFileSync(PRIVATE_KEY_PATH, 'utf8');
+let PRIVATE_KEY;
 
+try {
+  process.chdir(process.cwd());
+  PRIVATE_KEY = fs.readFileSync(process.env.JWT_PRIVATE_KEY_FILE, 'utf8');
+} catch (error) {
+  console.error(error);
+}
+
+function generateAccessToken(user) {
   const { _id } = user;
   const expiresIn = '14d';
 
