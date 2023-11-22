@@ -60,6 +60,8 @@ Read the [API documentation](./api_specification/) for more information.
 - ThunderClient: REST client for API testing.
 - ESLint: Linter tool.
 - Prettier: Code formatter.
+- Docker: Containerization technology.
+- Docker Compose: Tool for defining and running multi-service Docker applications.
 
 ## Getting Started
 
@@ -169,24 +171,12 @@ npm run dev
 npm start
 ```
 
-## Knowledge Gained and Applied
-
-- How to build a RESTFul API with Node.js and Express.
-- How to use MongoDB and Mongoose to store and query data.
-- How to implement token-based authorization with JWT.
-- How to enable CORS in an Express app.
-- How to hash passwords with Bcrypt.
-- How to validate and sanitize user input.
-- How to handle errors and send standardized responses.
-- How to test routers and controllers with Jest and Supertest.
-- How to test database operations with MongoDB Memory Server.
-- How to use ESLint and Prettier to maintain code quality.
-- How to prevent common security vulnerabilities.
-- How to prepare a Node.js app for production.
-
 ## If I have time
 
 - Create a blog frontend to consume the API.
 - Create an admin dashboard frontend to manage the blog.
 - Support comments on posts.
 - Create Swagger documentation for the API.
+- Use Nginx as a reverse proxy server.
+- Use Redis for caching.
+- Use a CI/CD tool to automate the deployment process.
