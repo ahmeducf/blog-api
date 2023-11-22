@@ -5,6 +5,8 @@ services:
     ports:
       - published: 3000
         target: 3000
+    volumes:
+      - logs:/app/logs
     environment:
       NODE_ENV: development
       DB_URI_FILE: /run/secrets/db_uri_dev
@@ -14,6 +16,8 @@ services:
       - db_uri_dev
       - id_rsa_priv
       - id_rsa_pub
+volumes:
+  logs:
 secrets:
   db_uri_dev:
     file: ./secrets/db_uri_dev.token
