@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  api:
+    build: .
+    ports:
+      - published: 3000
+        target: 3000
+    environment:
+      NODE_ENV: production
+      DB_URI_FILE: /run/secrets/db_uri_prod
+      JWT_PRIVATE_KEY_FILE: /run/secrets/id_rsa_priv
+      JWT_PUBLIC_KEY_FILE: /run/secrets/id_rsa_pub
+    secrets:
+      - db_uri_prod
+      - id_rsa_priv
+      - id_rsa_pub
+secrets:
+  db_uri_prod:
+    file: ./secrets/db_uri_prod.token
+  id_rsa_priv:
+    file: ./secrets/id_rsa_priv.pem
+  id_rsa_pub:
+    file: ./secrets/id_rsa_pub.pem
