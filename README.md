@@ -141,7 +141,7 @@ node populate_db.js <your-mongodb-uri>
 6. Create a `.env` file in the root directory and add the following environment variables
 
 ```bash
-NODE_ENV="development"
+NODE_ENV=<development | production>
 DB_URI_FILE=<path-to-db-uri-file> # e.g. ./secrets/db_uri_dev.token
 JWT_PRIVATE_KEY_FILE=<path-to-private-key-file> # e.g. ./secrets/id_rsa_priv
 JWT_PUBLIC_KEY_FILE=<path-to-public-key-file> # e.g. ./secrets/id_rsa_pub
