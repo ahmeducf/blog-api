@@ -62,3 +62,5 @@ typings/
 
 # private key for JWT
 id_rsa_priv.pem
+
+secrets/

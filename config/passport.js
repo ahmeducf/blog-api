@@ -1,11 +1,17 @@
 const { Strategy: JwtStrategy, ExtractJwt } = require('passport-jwt');
 const fs = require('fs');
-const path = require('path');
+require('dotenv').config();
 
 const User = require('../models/user');
 
-const PUBLIC_KEY_PATH = path.join(process.cwd(), 'id_rsa_pub.pem');
-const PUB_KEY = fs.readFileSync(PUBLIC_KEY_PATH, 'utf8');
+let PUB_KEY;
+
+try {
+  process.chdir(process.cwd());
+  PUB_KEY = fs.readFileSync(process.env.JWT_PUBLIC_KEY_FILE, 'utf8');
+} catch (error) {
+  console.error(error);
+}
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
