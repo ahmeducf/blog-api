@@ -1,10 +1,12 @@
 /**
- * This module will generate a public and private keypair and save to current directory
+ * This module will generate a public and private keyPair and save to current directory
  *
  * Make sure don't commit the private key to the repo
  */
 const crypto = require('crypto');
 const fs = require('fs');
+
+const directoryPathArg = process.argv[2];
 
 function genKeyPair() {
   // Generates an object where the keys are stored in properties `privateKey` and `publicKey`
@@ -20,10 +22,10 @@ function genKeyPair() {
     },
   });
 
-  fs.writeFileSync(`${__dirname}/id_rsa_pub.pem`, keyPair.publicKey);
+  fs.writeFileSync(`${directoryPathArg}/id_rsa_pub.pem`, keyPair.publicKey);
 
-  fs.writeFileSync(`${__dirname}/id_rsa_priv.pem`, keyPair.privateKey);
+  fs.writeFileSync(`${directoryPathArg}/id_rsa_priv.pem`, keyPair.privateKey);
 }
 
-// Generate the keypair
+// Generate the keyPair
 genKeyPair();
