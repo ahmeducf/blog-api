@@ -71,6 +71,43 @@ Read the [API documentation](./api_specification/) for more information.
 
 ### Installation
 
+#### Option 1: Use Docker Compose
+
+1. Clone the repository
+
+```bash
+git clone git@github.com:ahmeducf/blog-api.git
+```
+
+2. Navigate to the project directory
+
+```bash
+cd blog-api
+```
+
+3. Create a `secrets` directory and Add the following files with the appropriate values
+
+- `db_uri_dev.token`: MongoDB URI for development
+- `db_uri_prod.token`: MongoDB URI for production
+- `id_rsa_priv`: Private key for JWT
+- `id_rsa_pub`: Public key for JWT
+
+4. Run `docker-compose` to start the service
+
+- To start the service in development mode:
+
+```bash
+docker-compose -f docker-compose-dev.yml up
+```
+
+- To start the service in production mode:
+
+```bash
+docker-compose -f docker-compose-prod.yml up
+```
+
+#### Option 2: Run Locally
+
 1. Clone the repository
 
 ```bash
@@ -89,25 +126,27 @@ cd blog-api
 npm install
 ```
 
-4. Create a `.env` file in the root directory and add the following environment variables
+4. Generate public and private keys for JWT
+
+```bash
+node generate_keypair.js <path-to-parent-directory> # e.g. ./secrets
+```
+
+5. Populate the database with some sample data
+
+```bash
+node populate_db.js <your-mongodb-uri>
+```
+
+6. Create a `.env` file in the root directory and add the following environment variables
 
 ```bash
 NODE_ENV="development"
-DB_URI_DEV=<your-mongodb-uri>
+DB_URI_FILE=<path-to-db-uri-file> # e.g. ./secrets/db_uri_dev.token
+JWT_PRIVATE_KEY_FILE=<path-to-private-key-file> # e.g. ./secrets/id_rsa_priv
+JWT_PUBLIC_KEY_FILE=<path-to-public-key-file> # e.g. ./secrets/id_rsa_pub
 TEST_USERNAME=<your-test-username>
 TEST_PASSWORD=<your-test-password>
-```
-
-5. Generate public and private keys for JWT
-
-```bash
-node generate_keypair.js
-```
-
-6. Populate the database with some sample data
-
-```bash
-node populate_db.js
 ```
 
 7. Run the tests
@@ -116,10 +155,18 @@ node populate_db.js
 npm test
 ```
 
-8. Start the server in development mode
+8. Start the server
+
+- In development mode:
 
 ```bash
 npm run dev
+```
+
+- In production mode:
+
+```bash
+npm start
 ```
 
 ## Knowledge Gained and Applied
